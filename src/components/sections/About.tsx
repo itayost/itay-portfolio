@@ -128,8 +128,13 @@ export default function AboutSection() {
   );
 }
 
+// Define props interface for the RoleText component
+interface RoleTextProps {
+  roles: string[];
+}
+
 // Animated text component that cycles through different roles
-function RoleText({ roles }) {
+function RoleText({ roles }: RoleTextProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   
   useEffect(() => {
