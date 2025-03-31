@@ -2,8 +2,23 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
+// Define types for our skill data
+type Skill = {
+  name: string;
+  level: number;
+};
+
+type SkillsData = {
+  languages: Skill[];
+  frameworks: Skill[];
+  tools: Skill[];
+};
+
+// Define a type for the category ID to ensure it's a valid key of SkillsData
+type CategoryId = keyof SkillsData;
+
 // Skill data structure with categories
-const skillsData = {
+const skillsData: SkillsData = {
   languages: [
     { name: "Java", level: 85 },
     { name: "Python", level: 80 },
@@ -26,12 +41,12 @@ const skillsData = {
 };
 
 export default function SkillsVisualization() {
-  const [activeCategory, setActiveCategory] = useState("languages");
+  const [activeCategory, setActiveCategory] = useState<CategoryId>("languages");
   
   const categories = [
-    { id: "languages", label: "Languages" },
-    { id: "frameworks", label: "Frameworks" },
-    { id: "tools", label: "Tools" }
+    { id: "languages" as CategoryId, label: "Languages" },
+    { id: "frameworks" as CategoryId, label: "Frameworks" },
+    { id: "tools" as CategoryId, label: "Tools" }
   ];
   
   return (
