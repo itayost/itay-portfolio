@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
-import ContactForm from "@/components/ContactForm"; // Make sure this path is correct
 
 export default function ContactSection() {
   return (
@@ -51,11 +50,6 @@ export default function ContactSection() {
                 </a>
               </li>
             </ul>
-          </div>
-          
-          {/* Contact Form */}
-          <div>
-            <ContactForm />
           </div>
         </div>
       </motion.div>
