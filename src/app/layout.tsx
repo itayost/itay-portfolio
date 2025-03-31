@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 export const metadata = {
   title: "Itay Ostraich | Portfolio",
   description: "Personal portfolio website of Itay Ostraich",
+  metadataBase: new URL("https://www.itayost.com"),
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32' },
@@ -16,15 +17,15 @@ export const metadata = {
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
-  // Add Open Graph metadata to control social media previews
+
   openGraph: {
     title: "Itay Ostraich | Software Engineer",
     description: "Personal portfolio website showcasing my projects and skills as a software engineering student",
-    url: 'https://your-domain.vercel.app/', // Replace with your actual domain
+    url: 'https://www.itayost.com/',
     siteName: 'Itay Ostraich Portfolio',
     images: [
       {
-        url: '/og-image.jpg', // Path to your OG image in the public folder
+        url: '/og-image.jpg', 
         width: 1200,
         height: 630,
         alt: 'Itay Ostraich - Software Engineering Student',
@@ -33,7 +34,6 @@ export const metadata = {
     locale: 'en_US',
     type: 'website',
   },
-  // Add Twitter card metadata (optional but recommended)
   twitter: {
     card: 'summary_large_image',
     title: "Itay Ostraich | Software Engineer",
