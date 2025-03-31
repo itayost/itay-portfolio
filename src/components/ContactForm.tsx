@@ -39,7 +39,7 @@ export default function ContactForm() {
       setTimeout(() => {
         setFormStatus(prev => ({ ...prev, submitted: false }));
       }, 5000);
-    } catch (error) {
+    } catch (err) {
       setFormStatus({ submitted: false, submitting: false, error: "Failed to send message. Please try again." });
     }
   };
@@ -50,29 +50,29 @@ export default function ContactForm() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-6 mt-8"
+      className="bg-white shadow-md rounded-xl p-6 mt-8"
     >
-      <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100">Send me a message</h3>
+      <h3 className="text-xl font-semibold mb-4">Send me a message</h3>
       
       {formStatus.submitted ? (
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-green-100 dark:bg-green-900 border border-green-300 dark:border-green-700 text-green-700 dark:text-green-300 px-4 py-3 rounded-lg mb-4"
+          className="bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-lg mb-4"
         >
-          Thank you for your message! I'll get back to you soon.
+          Thank you for your message! I&apos;ll get back to you soon.
         </motion.div>
       ) : null}
       
       {formStatus.error ? (
-        <div className="bg-red-100 dark:bg-red-900 border border-red-300 dark:border-red-700 text-red-700 dark:text-red-300 px-4 py-3 rounded-lg mb-4">
+        <div className="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-4">
           {formStatus.error}
         </div>
       ) : null}
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="name" className="block text-gray-700 mb-2">
             Name
           </label>
           <input
@@ -82,13 +82,13 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             placeholder="Your name"
           />
         </div>
         
         <div>
-          <label htmlFor="email" className="block text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="email" className="block text-gray-700 mb-2">
             Email
           </label>
           <input
@@ -98,13 +98,13 @@ export default function ContactForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             placeholder="your.email@example.com"
           />
         </div>
         
         <div>
-          <label htmlFor="message" className="block text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="message" className="block text-gray-700 mb-2">
             Message
           </label>
           <textarea
@@ -114,7 +114,7 @@ export default function ContactForm() {
             onChange={handleChange}
             required
             rows={4}
-            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
             placeholder="Your message here..."
           />
         </div>
@@ -122,7 +122,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={formStatus.submitting}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:bg-blue-400 dark:disabled:bg-blue-600 dark:disabled:opacity-50"
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 disabled:bg-blue-400"
         >
           {formStatus.submitting ? (
             <>

@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { FaGraduationCap, FaCode, FaLanguage } from "react-icons/fa";
+import { FaGraduationCap, FaLanguage } from "react-icons/fa";
 import SkillsVisualization from "@/components/SkillsVisualization";
 
 export default function ResumeSection() {
@@ -14,7 +14,7 @@ export default function ResumeSection() {
       >
         <h1>Resume</h1>
         <p className="mb-6">
-          Here's an overview of my background, skills, and projects.
+          Here&apos;s an overview of my background, skills, and projects.
         </p>
       <SkillsVisualization />
         <div className="space-y-10">

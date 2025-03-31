@@ -42,7 +42,7 @@ export default function AboutSection() {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="text-xl md:text-2xl font-light mb-2"
           >
-            Hello, I'm
+            Hello, I&apos;m
           </motion.h2>
           
           <motion.h1 

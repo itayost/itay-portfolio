@@ -16,7 +16,7 @@ export default function ProjectsSection() {
           <FaProjectDiagram /> Projects
         </h1>
         <p className="mb-8">
-          Here are some personal and academic projects I've worked on.
+          Here are some personal and academic projects I&apos;ve worked on.
         </p>
 
         <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -35,14 +35,13 @@ export default function ProjectsSection() {
               Android app for restaurant booking with Firebase backend.
               Built with <strong>Java</strong> and <strong>Firebase</strong>.
             </p>
-            <button
-              onClick={() => window.open("https://github.com/itayost/Tables", "_blank")}
-              className="mt-4 bg-blue-600 text-white font-medium px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+            <a
+              href="https://github.com/itayost/Tables"
+              target="_blank"
+              className="project-button flex items-center gap-2"
             >
-              <span className="flex items-center gap-2">
-                <FaGithub /> View on GitHub
-              </span>
-            </button>
+              <FaGithub /> View on GitHub
+            </a>
           </div>
 
           <div className="project-card">
@@ -59,14 +58,13 @@ export default function ProjectsSection() {
             <p>
               2D arcade-style game in <strong>Unity</strong> using <strong>C#</strong> with power-ups and fast-paced gameplay.
             </p>
-            <button
-              onClick={() => window.open("https://github.com/itayost/Unity-Idea", "_blank")}
-              className="mt-4 bg-blue-600 text-white font-medium px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+            <a
+              href="https://github.com/itayost/Unity-Idea"
+              target="_blank"
+              className="project-button flex items-center gap-2"
             >
-              <span className="flex items-center gap-2">
-                <FaGithub /> View on GitHub
-              </span>
-            </button>
+              <FaGithub /> View on GitHub
+            </a>
           </div>
         </div>
       </motion.div>
