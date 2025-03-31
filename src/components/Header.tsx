@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { FaBars, FaTimes, FaGithub, FaLinkedin } from "react-icons/fa";
 import ThemeToggle from "./ThemeToggle";
-import Logo from "./Logo";
 
 const navItems = [
   { id: "about", label: "About" },
