@@ -39,7 +39,7 @@ export default function ContactForm() {
       setTimeout(() => {
         setFormStatus(prev => ({ ...prev, submitted: false }));
       }, 5000);
-    } catch (err) {
+    } catch {
       setFormStatus({ submitted: false, submitting: false, error: "Failed to send message. Please try again." });
     }
   };
