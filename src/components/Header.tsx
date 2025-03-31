@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { FaBars, FaTimes, FaGithub, FaLinkedin } from "react-icons/fa";
 import ThemeToggle from "./ThemeToggle";
+import Logo from "./Logo";
 
 const navItems = [
   { id: "about", label: "About" },
@@ -41,16 +42,7 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
         {/* Logo / Name + Icons */}
         <div className="flex items-center gap-4">
-          <ScrollLink
-            to="about"
-            smooth={true}
-            duration={500}
-            className="cursor-pointer"
-          >
-            <h1>
-              Itay Ostraich
-            </h1>
-          </ScrollLink>
+          <h1> Itay Ostraich </h1>
           
           <div className="flex items-center gap-2">
             <a
