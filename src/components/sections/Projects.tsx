@@ -57,10 +57,36 @@ export default function ProjectsSection() {
             </div>
             <h2 className="text-lg font-semibold mb-2">Foosball Dodge</h2>
             <p>
-              2D arcade-style game in <strong>Unity</strong> using <strong>C#</strong> with power-ups and fast-paced gameplay.
+              3D arcade-style game in <strong>Unity</strong> using <strong>C#</strong> with power-ups and fast-paced gameplay.
             </p>
             <button
               onClick={() => window.open("https://github.com/itayost/Unity-Idea", "_blank")}
+              className="mt-4 bg-blue-600 text-white font-medium px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+            >
+              <span className="flex items-center gap-2">
+                <FaGithub /> View on GitHub
+              </span>
+            </button>
+          </div>
+          
+          {/* New SQL Project Card */}
+          <div className="project-card">
+            <div className="relative w-full h-[200px] mb-4">
+              <Image
+                src="/projects/sql-project.png"
+                alt="SQL Database Project"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="project-image object-cover"
+              />
+            </div>
+            <h2 className="text-lg font-semibold mb-2">Test Management System</h2>
+            <p>
+              SQL-based system for managing questions, answers, and building tests.
+              Features a structured database for educational assessment creation and organization.
+            </p>
+            <button
+              onClick={() => window.open("https://github.com/itayost/SQLproject", "_blank")}
               className="mt-4 bg-blue-600 text-white font-medium px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
             >
               <span className="flex items-center gap-2">
