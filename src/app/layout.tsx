@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { ReactNode } from "react";
 
 export const metadata = {
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="bg-[var(--background)] text-[var(--foreground)] font-sans">
+        <SEO>
         <Header />
         {children}
         <Footer />
