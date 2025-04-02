@@ -15,6 +15,7 @@ const navItems = [
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   
   // Handle scroll event to change header style
   useEffect(() => {
@@ -26,29 +27,62 @@ export default function Header() {
       }
     };
     
+    // Check initial dark mode state
+    const checkDarkMode = () => {
+      setIsDarkMode(document.documentElement.classList.contains('dark'));
+    };
+
+    // Initial check
+    checkDarkMode();
+    
+    // Listen for dark mode changes
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, { 
+      attributes: true, 
+      attributeFilter: ['class'] 
+    });
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
     <header 
-      className={`w-full backdrop-blur-md sticky top-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? "bg-white/90 dark:bg-gray-900/90 shadow-md py-3" 
-          : "bg-white/70 dark:bg-gray-900/70 py-4"
-      }`}
+      className={`w-full backdrop-blur-md sticky top-0 z-50 transition-all duration-300 
+        ${isDarkMode 
+          ? 'bg-black/95' 
+          : 'bg-white/70'
+        } 
+        ${scrolled 
+          ? "shadow-md py-3" 
+          : "py-4"
+        }`}
     >
       <div className="max-w-6xl mx-auto px-4 flex justify-between items-center">
         {/* Logo / Name + Icons */}
         <div className="flex items-center gap-4">
-          <h1> Itay Ostraich </h1>
+          <h1 className={`
+            ${isDarkMode 
+              ? 'text-gray-100' 
+              : 'text-gray-900'
+            }
+          `}> Itay Ostraich </h1>
           
           <div className="flex items-center gap-2">
             <a
               href="https://www.linkedin.com/in/itayost"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400 text-xl transition"
+              className={`
+                text-xl transition
+                ${isDarkMode 
+                  ? 'text-gray-300 hover:text-blue-400' 
+                  : 'text-gray-700 hover:text-blue-700'
+                }
+              `}
               title="View LinkedIn"
               aria-label="LinkedIn Profile"
             >
@@ -58,7 +92,13 @@ export default function Header() {
               href="https://github.com/itayost"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white text-xl transition"
+              className={`
+                text-xl transition
+                ${isDarkMode 
+                  ? 'text-gray-300 hover:text-white' 
+                  : 'text-gray-700 hover:text-black'
+                }
+              `}
               title="View GitHub"
               aria-label="GitHub Profile"
             >
@@ -77,7 +117,13 @@ export default function Header() {
                 smooth={true}
                 duration={500}
                 offset={-80}
-                className="cursor-pointer no-underline text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors duration-200"
+                className={`
+                  cursor-pointer no-underline transition-colors duration-200
+                  ${isDarkMode 
+                    ? 'text-gray-300 hover:text-white' 
+                    : 'text-gray-700 hover:text-black'
+                  }
+                `}
               >
                 {item.label}
               </ScrollLink>
@@ -89,7 +135,13 @@ export default function Header() {
 
           {/* Hamburger Button - Mobile only */}
           <button
-            className="block md:hidden text-2xl text-gray-700 dark:text-gray-300 focus:outline-none transition"
+            className={`
+              block md:hidden text-2xl focus:outline-none transition
+              ${isDarkMode 
+                ? 'text-gray-300' 
+                : 'text-gray-700'
+              }
+            `}
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -100,7 +152,15 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <nav className="mobile-nav md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-md animate-fade-in">
+        <nav 
+          className={`
+            mobile-nav md:hidden border-t shadow-md animate-fade-in
+            ${isDarkMode 
+              ? 'bg-black border-gray-700' 
+              : 'bg-white border-gray-200'
+            }
+          `}
+        >
           <ul className="flex flex-col items-center space-y-4 py-4">
             {navItems.map((item) => (
               <li key={item.id}>
@@ -110,7 +170,13 @@ export default function Header() {
                   duration={500}
                   offset={-80}
                   onClick={() => setIsOpen(false)}
-                  className="cursor-pointer no-underline text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition"
+                  className={`
+                    cursor-pointer no-underline transition
+                    ${isDarkMode 
+                      ? 'text-gray-300 hover:text-white' 
+                      : 'text-gray-700 hover:text-black'
+                    }
+                  `}
                 >
                   {item.label}
                 </ScrollLink>
