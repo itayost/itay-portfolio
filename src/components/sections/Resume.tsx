@@ -33,7 +33,7 @@ export default function ResumeSection() {
             </h2>
             <ul>
               <li>Hebrew – Native</li>
-              <li>English – Intermediate</li>
+              <li>English – Fluent</li>
               <li>Spanish – Basic</li>
             </ul>
           </div>
