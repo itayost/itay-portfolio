@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { FaEnvelope, FaLinkedin, FaGithub, FaMapMarkerAlt } from "react-icons/fa";
 
 // Types
@@ -13,7 +13,7 @@ export type ContactInfoItem = {
 
 type ContactInfoCardProps = {
   className?: string;
-  variants?: any;
+  variants?: Variants;
 };
 
 // Animation variants
