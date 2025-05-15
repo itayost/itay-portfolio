@@ -50,6 +50,11 @@ main {
   @apply py-20 px-4 md:px-6 max-w-5xl mx-auto;
 }
 
+/* Adjust the first section to accommodate the fixed header */
+#about.section-wrapper {
+  @apply pt-28 md:pt-32; /* More padding at the top for the header */
+}
+
 /* ===== Typography ===== */
 h1 {
   @apply text-4xl font-bold mb-6 tracking-tight;
@@ -103,6 +108,11 @@ nav a {
   @apply text-gray-200 hover:text-white;
 }
 
+/* Header styles for overlay */
+header {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+
 /* Header menu text in dark mode */
 .dark header nav a {
   color: #e5e7eb; /* Light gray */
@@ -110,6 +120,11 @@ nav a {
 
 .dark header nav a:hover {
   color: #ffffff; /* White on hover */
+}
+
+/* Ensure header text is visible */
+header nav a {
+  text-shadow: none;
 }
 
 .dark header h1 {
@@ -171,6 +186,11 @@ nav a {
   animation: fadeIn 0.5s ease-in-out;
 }
 
+/* Header fade in animation for better UX */
+.header-fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
 /* ===== Scroll ===== */
 ::-webkit-scrollbar {
   width: 10px;
@@ -186,5 +206,38 @@ nav a {
 }
 
 ::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* ===== Project Cards ===== */
+.project-card {
+  @apply flex flex-col justify-between w-full h-full border rounded-2xl shadow-sm p-6 transition hover:shadow-md cursor-pointer;
+  border-color: var(--border);
+  background-color: var(--card-bg);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-image {
+  @apply rounded-xl mb-4;
+}
+
+/* For modal scrollbar styling */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
 }
