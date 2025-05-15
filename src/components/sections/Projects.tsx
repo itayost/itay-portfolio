@@ -23,7 +23,7 @@ export default function ProjectsSection() {
           <FaProjectDiagram /> Projects
         </h1>
         <p className="mb-8">
-          Here are some personal and academic projects I've worked on.
+          Here are some personal and academic projects I&apos;ve worked on.
         </p>
 
         <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

@@ -62,7 +62,7 @@ export default function ContactSection() {
           className="text-lg max-w-2xl mb-10"
         >
           Feel free to reach out if you want to collaborate, have a question, or just want to connect. 
-          I'm always open to new opportunities and interesting conversations!
+          I&apos;m always open to new opportunities and interesting conversations!
         </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
