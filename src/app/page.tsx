@@ -1,17 +1,12 @@
-import AboutSection from "@/components/sections/About";
-import ResumeSection from "@/components/sections/Resume";
-import ProjectsSection from "@/components/sections/Projects";
-import ContactSection from "@/components/sections/Contact";
+import { About, Resume, Projects, Contact } from "@/components/sections";
 
 export default function HomePage() {
   return (
-    <>
-      <main>
-        <AboutSection />
-        <ResumeSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
-    </>
+    <main>
+      <About />
+      <Resume />
+      <Projects />
+      <Contact />
+    </main>
   );
 }

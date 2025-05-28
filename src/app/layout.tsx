@@ -1,14 +1,14 @@
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Header, Footer } from "@/components/layout";
 import { ReactNode } from "react";
 import Script from "next/script";
+import { siteConfig } from "@/lib/config/site";
 
 export const metadata = {
-  title: "Itay Ostraich | Software Engineer & Developer",
-  description: "Personal portfolio website of Itay Ostraich, a Software Engineering student specializing in mobile, game, and web development.",
-  metadataBase: new URL("https://www.itayost.com"),
-  keywords: "Software Engineer, Mobile Developer, Game Developer, Web Developer, Java, Python, C#, Unity, React",
+  title: siteConfig.title,
+  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.url),
+  keywords: siteConfig.keywords,
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '32x32' },
@@ -20,16 +20,16 @@ export const metadata = {
     ],
   },
   openGraph: {
-    title: "Itay Ostraich | Software Engineer",
-    description: "Personal portfolio website showcasing my projects and skills as a software engineering student specializing in mobile and game development",
-    url: 'https://www.itayost.com/',
-    siteName: 'Itay Ostraich Portfolio',
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: `${siteConfig.name} Portfolio`,
     images: [
       {
-        url: '/og-image.jpg', 
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: 'Itay Ostraich - Software Engineering Student',
+        alt: `${siteConfig.name} - ${siteConfig.author.role}`,
       },
     ],
     locale: 'en_US',
@@ -37,12 +37,12 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Itay Ostraich | Software Engineer",
-    description: "Portfolio showcasing my software engineering projects and skills in mobile, game, and web development",
-    images: ['/og-image.jpg'],
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
   },
   alternates: {
-    canonical: 'https://www.itayost.com',
+    canonical: siteConfig.url,
   },
 };
 
@@ -50,12 +50,12 @@ export const metadata = {
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  "name": "Itay Ostraich",
-  "url": "https://www.itayost.com",
-  "jobTitle": "Software Engineer",
+  "name": siteConfig.name,
+  "url": siteConfig.url,
+  "jobTitle": siteConfig.author.role,
   "sameAs": [
-    "https://www.linkedin.com/in/itayost",
-    "https://github.com/itayost"
+    siteConfig.links.linkedin,
+    siteConfig.links.github
   ],
   "knowsAbout": [
     "Software Engineering",
