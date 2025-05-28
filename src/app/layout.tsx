@@ -1,7 +1,6 @@
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import SkipToContent from "@/components/SkipToContent";
 import { ReactNode } from "react";
 import Script from "next/script";
 
@@ -70,7 +69,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="bg-[var(--background)] text-[var(--foreground)] font-sans">
-        <SkipToContent />
         {/* Add structured data directly with Script component */}
         <Script
           id="schema-person"
@@ -79,9 +77,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         
         <Header />
-        <main id="main-content" tabIndex={-1}>
-          {children}
-        </main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>
