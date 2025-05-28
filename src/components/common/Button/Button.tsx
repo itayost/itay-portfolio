@@ -4,13 +4,10 @@ import { forwardRef, ButtonHTMLAttributes } from "react";
 import { motion, MotionProps } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 
-type BaseButtonProps = {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
-}
-
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, BaseButtonProps {
   motionProps?: MotionProps;
 }
 
@@ -22,7 +19,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     fullWidth = false,
     children,
     motionProps,
-    ...props 
+    // Extract motion-conflicting props
+    onAnimationStart,
+    onDragStart,
+    onDragEnd,
+    onDrag,
+    style,
+    ...htmlProps 
   }, ref) => {
     const baseStyles = "font-medium rounded-full transition-all inline-flex items-center justify-center gap-2";
     
@@ -52,8 +55,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         <motion.button
           ref={ref}
           className={buttonClassName}
+          style={style}
+          {...htmlProps}
           {...motionProps}
-          {...props}
         >
           {children}
         </motion.button>
@@ -64,7 +68,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={buttonClassName}
-        {...props}
+        style={style}
+        onAnimationStart={onAnimationStart}
+        {...htmlProps}
       >
         {children}
       </button>
