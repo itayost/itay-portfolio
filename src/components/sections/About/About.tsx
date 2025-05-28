@@ -7,7 +7,6 @@ import RoleText from "./RoleText";
 import Button from "@/components/common/Button";
 import { siteConfig } from "@/lib/config/site";
 import { SCROLL_DURATION, SCROLL_OFFSET } from "@/lib/constants/navigation";
-import { fadeInUp } from "@/lib/utils/animations";
 
 const ROLES = ["Software Engineer", "Game Developer", "Mobile App Developer"];
 

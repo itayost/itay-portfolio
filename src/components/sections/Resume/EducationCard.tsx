@@ -2,7 +2,6 @@
 import { FaGraduationCap } from "react-icons/fa";
 import Card from "@/components/common/Card";
 import { RESUME_DATA } from "@/lib/constants/skills";
-import { motion } from "framer-motion";
 
 export default function EducationCard() {
   return (

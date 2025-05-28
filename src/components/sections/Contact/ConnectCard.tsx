@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { FaEnvelope } from "react-icons/fa";
 import Card from "@/components/common/Card";
 import Button from "@/components/common/Button";
-import { fadeInUp } from "@/lib/utils/animations";
 
 interface ConnectCardProps {
   className?: string;
