@@ -10,10 +10,12 @@ import ThemeToggle from "./ThemeToggle";
 const navItems = [
   { id: "about", label: "About" },
   { id: "resume", label: "Resume" },
-  { id: "projects", label: "Projects", subItems: [
-    { id: "personal-projects", label: "Personal Projects" },
-    { id: "academic-projects", label: "Academic Projects" }
-  ]},
+  {
+    id: "projects", label: "Projects", subItems: [
+      { id: "personal-projects", label: "Personal Projects" },
+      { id: "academic-projects", label: "Academic Projects" }
+    ]
+  },
   { id: "contact", label: "Contact" },
 ];
 
@@ -115,7 +117,9 @@ export default function Header() {
   }, []);
 
   return (
-    <header 
+    <header
+      role="navigation"
+      aria-label="Main navigation" 
       className={`w-full backdrop-blur-md fixed top-0 z-50 transition-all duration-300 header-fade-in
         ${isDarkMode 
           ? 'bg-black/95' 
@@ -140,6 +144,7 @@ export default function Header() {
             duration={800}
             offset={-80}
             className="cursor-pointer"
+            aria-label="Itay Ostraich - Go to home"
           >
             <h1 className={`
               font-bold text-lg md:text-xl transition-all duration-300
@@ -318,8 +323,9 @@ export default function Header() {
               } hover:bg-gray-100 dark:hover:bg-gray-800
             `}
             onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
           >
             {isOpen ? <FaTimes /> : <FaBars />}
           </motion.button>
@@ -341,6 +347,9 @@ export default function Header() {
                 : 'bg-white border-gray-200'
               }
             `}
+            id="mobile-navigation"
+            role="navigation"
+            aria-label="Mobile navigation"
           >
             <ul className="flex flex-col items-center space-y-3 py-4">
               {navItems.map((item) => (

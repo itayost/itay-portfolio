@@ -132,6 +132,7 @@ function SocialMediaLinks() {
           target="_blank"
           rel="noopener noreferrer"
           className="w-10 h-10 flex items-center justify-center rounded-full border shadow-sm transition-all"
+          aria-label="Visit Itay Ostraich's LinkedIn profile"
           style={{ 
             borderColor: 'var(--border)',
             color: 'var(--foreground)',
@@ -144,7 +145,6 @@ function SocialMediaLinks() {
             color: 'var(--primary)'
           }}
           whileTap={{ scale: 0.95 }}
-          aria-label="LinkedIn Profile"
         >
           <FaLinkedin className="text-lg" />
         </motion.a>
@@ -167,7 +167,7 @@ function SocialMediaLinks() {
             color: 'var(--primary)'
           }}
           whileTap={{ scale: 0.95 }}
-          aria-label="GitHub Profile"
+          aria-label="Visit Itay Ostraich's GitHub profile"
         >
           <FaGithub className="text-lg" />
         </motion.a>
@@ -188,7 +188,7 @@ function SocialMediaLinks() {
             color: 'var(--primary)'
           }}
           whileTap={{ scale: 0.95 }}
-          aria-label="Email Me"
+          aria-label="Send email to Itay Ostraich at itayost1@gmail.com"
         >
           <FaEnvelope className="text-lg" />
         </motion.a>

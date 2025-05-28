@@ -21,6 +21,8 @@ export default function AboutSection() {
     <section
       id="about"
       className="relative min-h-screen w-full bg-fixed bg-center bg-cover bg-no-repeat flex items-center"
+      aria-label="About Itay Ostraich"
+      role="region"
       style={{ 
         backgroundImage: "url('/bg.jpg')",
         opacity: loaded ? 1 : 0,
