@@ -8,7 +8,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
-  motionProps?: HTMLMotionProps<"button">;
+  motionProps?: Omit<HTMLMotionProps<"button">, keyof ButtonHTMLAttributes<HTMLButtonElement>>;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -36,11 +36,27 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       lg: "px-8 py-4 text-lg"
     };
     
-    const Component = motionProps ? motion.button : 'button';
-    const componentProps = motionProps ? { ...props, ...motionProps } : props;
+    if (motionProps) {
+      return (
+        <motion.button
+          ref={ref}
+          className={cn(
+            baseStyles,
+            variants[variant],
+            sizes[size],
+            fullWidth && "w-full",
+            className
+          )}
+          {...motionProps}
+          {...props}
+        >
+          {children}
+        </motion.button>
+      );
+    }
     
     return (
-      <Component
+      <button
         ref={ref}
         className={cn(
           baseStyles,
@@ -49,10 +65,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           fullWidth && "w-full",
           className
         )}
-        {...componentProps}
+        {...props}
       >
         {children}
-      </Component>
+      </button>
     );
   }
 );
