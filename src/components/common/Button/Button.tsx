@@ -1,14 +1,17 @@
 "use client";
 
 import { forwardRef, ButtonHTMLAttributes } from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion, MotionProps } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type BaseButtonProps = {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
-  motionProps?: Omit<HTMLMotionProps<"button">, keyof ButtonHTMLAttributes<HTMLButtonElement>>;
+}
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, BaseButtonProps {
+  motionProps?: MotionProps;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -36,17 +39,19 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       lg: "px-8 py-4 text-lg"
     };
     
+    const buttonClassName = cn(
+      baseStyles,
+      variants[variant],
+      sizes[size],
+      fullWidth && "w-full",
+      className
+    );
+    
     if (motionProps) {
       return (
         <motion.button
           ref={ref}
-          className={cn(
-            baseStyles,
-            variants[variant],
-            sizes[size],
-            fullWidth && "w-full",
-            className
-          )}
+          className={buttonClassName}
           {...motionProps}
           {...props}
         >
@@ -58,13 +63,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={cn(
-          baseStyles,
-          variants[variant],
-          sizes[size],
-          fullWidth && "w-full",
-          className
-        )}
+        className={buttonClassName}
         {...props}
       >
         {children}
