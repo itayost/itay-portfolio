@@ -7,11 +7,9 @@ import { cn } from "@/lib/utils/cn";
 export type CardVariant = 'default' | 'hover' | 'interactive' | 'elevated' | 'outlined' | 'glass' | 'gradient';
 export type CardPadding = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export interface CardProps extends HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'onAnimationStart' | 'onAnimationEnd' | 'onDrag' | 'onDragStart' | 'onDragEnd'> {
   variant?: CardVariant;
   padding?: CardPadding;
-  asMotion?: boolean;
-  motionProps?: MotionProps;
   hoverEffect?: 'lift' | 'grow' | 'glow' | 'tilt' | 'none';
   gradient?: 'none' | 'subtle' | 'vibrant' | 'radial';
   glass?: boolean;
@@ -32,8 +30,6 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     header,
     footer,
     children,
-    asMotion = false,
-    motionProps,
     ...props 
   }, ref) => {
     
@@ -181,28 +177,6 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       </>
     );
     
-    // Default motion props for cards
-    const defaultMotionProps: MotionProps = {
-      initial: { opacity: 0, y: 20 },
-      animate: { opacity: 1, y: 0 },
-      exit: { opacity: 0, y: -20 },
-      transition: { duration: 0.3 },
-      ...motionProps
-    };
-    
-    if (asMotion || motionProps) {
-      return (
-        <motion.div
-          ref={ref}
-          className={cardClassName}
-          {...defaultMotionProps}
-          {...props}
-        >
-          {cardContent}
-        </motion.div>
-      );
-    }
-    
     return (
       <div
         ref={ref}
@@ -218,6 +192,10 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 Card.displayName = "Card";
 
 export default Card;
+
+// Motion Card component
+export const MotionCard = motion(Card);
+MotionCard.displayName = "MotionCard";
 
 // Specialized card variants for common use cases
 export const GlassCard = forwardRef<HTMLDivElement, Omit<CardProps, 'variant' | 'glass'>>(
