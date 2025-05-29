@@ -1,7 +1,6 @@
 "use client";
 
 import { forwardRef, ButtonHTMLAttributes, ReactNode } from "react";
-import { motion, MotionProps } from "framer-motion";
 import { 
   getButtonStyles, 
   getEnhancedButtonStyles, 
@@ -18,8 +17,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   leftIcon?: ReactNode;
   rightIcon?: ReactNode;
   enhancements?: (keyof typeof buttonEnhancements)[];
-  asMotion?: boolean;
-  motionProps?: Omit<MotionProps, 'children'>;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -33,8 +30,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     leftIcon,
     rightIcon,
     enhancements,
-    asMotion = false,
-    motionProps,
     children,
     ...props 
   }, ref) => {
@@ -78,24 +73,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       </>
     );
     
-    // Return motion button if requested
-    if (asMotion) {
-      return (
-        <motion.button
-          ref={ref}
-          className={buttonClassName}
-          disabled={isDisabled}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          {...motionProps}
-          {...props}
-        >
-          {buttonContent}
-        </motion.button>
-      );
-    }
-    
-    // Return standard button
     return (
       <button
         ref={ref}
@@ -112,9 +89,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button";
 
 export default Button;
-
-// Export a motion-wrapped version for convenience
-export const MotionButton = motion(Button);
 
 // Example IconButton component using the enhanced Button
 export const IconButton = forwardRef<HTMLButtonElement, Omit<ButtonProps, 'children'> & { 
