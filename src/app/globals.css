@@ -1,28 +1,93 @@
 @import "tailwindcss";
 
-/* ===== Variables ===== */
+/* ===== Theme Configuration (Tailwind CSS v4) ===== */
+@theme {
+  /* Font Family */
+  --font-sans: Inter, Arial, Helvetica, sans-serif;
+  
+  /* Colors - Using OKLCH color space for better vibrancy */
+  /* Light mode colors */
+  --color-background-light: oklch(0.99 0 0); /* #f8fafc */
+  --color-foreground-light: oklch(0.23 0.01 240); /* #1f2937 */
+  --color-primary-light: oklch(0.51 0.24 255); /* #2563eb */
+  --color-secondary-light: oklch(0.69 0.19 200); /* #06b6d4 */
+  --color-accent-light: oklch(0.57 0.21 255); /* #3b82f6 */
+  --color-border-light: oklch(0.92 0 0); /* #e5e7eb */
+  --color-card-bg-light: oklch(1 0 0); /* #ffffff */
+  --color-muted-light: oklch(0.70 0.01 240); /* #9ca3af */
+  
+  /* Dark mode colors */
+  --color-background-dark: oklch(0.15 0.02 240); /* #0f172a */
+  --color-foreground-dark: oklch(0.98 0 0); /* #f8fafc */
+  --color-primary-dark: oklch(0.57 0.21 255); /* #3b82f6 */
+  --color-secondary-dark: oklch(0.74 0.16 200); /* #22d3ee */
+  --color-accent-dark: oklch(0.65 0.18 255); /* #60a5fa */
+  --color-border-dark: oklch(0.33 0.01 240); /* #334155 */
+  --color-card-bg-dark: oklch(0.23 0.02 240); /* #1e293b */
+  --color-muted-dark: oklch(0.50 0.01 240); /* #64748b */
+  
+  /* Navigation specific colors */
+  --color-nav-bg-light: color-mix(in oklch, oklch(1 0 0) 80%, transparent);
+  --color-nav-bg-solid-light: color-mix(in oklch, oklch(1 0 0) 95%, transparent);
+  --color-nav-text-light: oklch(0.35 0.01 240); /* #374151 */
+  --color-nav-text-hover-light: oklch(0.13 0.01 240); /* #111827 */
+  --color-nav-active-light: oklch(0.51 0.24 255); /* #2563eb */
+  --color-nav-active-bg-light: oklch(0.93 0.04 255); /* #dbeafe */
+  
+  --color-nav-bg-dark: color-mix(in oklch, oklch(0.17 0.02 240) 80%, transparent);
+  --color-nav-bg-solid-dark: color-mix(in oklch, oklch(0.17 0.02 240) 95%, transparent);
+  --color-nav-text-dark: oklch(0.92 0 0); /* #e5e7eb */
+  --color-nav-text-hover-dark: oklch(1 0 0); /* #ffffff */
+  --color-nav-active-dark: oklch(0.65 0.18 255); /* #60a5fa */
+  --color-nav-active-bg-dark: color-mix(in oklch, oklch(0.57 0.21 255) 10%, transparent);
+  
+  /* Spacing scale */
+  --spacing: 0.25rem;
+  
+  /* Animation */
+  --animate-fade-in: fadeIn 0.5s ease-in-out;
+}
+
+/* ===== CSS Variables Setup ===== */
 :root {
-  --background: #f8fafc;
-  --foreground: #1f2937;
-  --primary: #2563eb;
-  --secondary: #06b6d4;
-  --accent: #3b82f6;
-  --border: #e5e7eb;
-  --card-bg: #ffffff;
-  --muted: #9ca3af;
+  --background: var(--color-background-light);
+  --foreground: var(--color-foreground-light);
+  --primary: var(--color-primary-light);
+  --secondary: var(--color-secondary-light);
+  --accent: var(--color-accent-light);
+  --border: var(--color-border-light);
+  --card-bg: var(--color-card-bg-light);
+  --muted: var(--color-muted-light);
+  
+  /* Navigation specific */
+  --nav-bg: var(--color-nav-bg-light);
+  --nav-bg-solid: var(--color-nav-bg-solid-light);
+  --nav-text: var(--color-nav-text-light);
+  --nav-text-hover: var(--color-nav-text-hover-light);
+  --nav-active: var(--color-nav-active-light);
+  --nav-active-bg: var(--color-nav-active-bg-light);
 }
 
 .dark {
-  --background: #0f172a;
-  --foreground: #f8fafc;
-  --primary: #3b82f6;
-  --secondary: #22d3ee;
-  --accent: #60a5fa;
-  --border: #334155;
-  --card-bg: #1e293b;
-  --muted: #64748b;
+  --background: var(--color-background-dark);
+  --foreground: var(--color-foreground-dark);
+  --primary: var(--color-primary-dark);
+  --secondary: var(--color-secondary-dark);
+  --accent: var(--color-accent-dark);
+  --border: var(--color-border-dark);
+  --card-bg: var(--color-card-bg-dark);
+  --muted: var(--color-muted-dark);
+  
+  /* Navigation specific */
+  --nav-bg: var(--color-nav-bg-dark);
+  --nav-bg-solid: var(--color-nav-bg-solid-dark);
+  --nav-text: var(--color-nav-text-dark);
+  --nav-text-hover: var(--color-nav-text-hover-dark);
+  --nav-active: var(--color-nav-active-dark);
+  --nav-active-bg: var(--color-nav-active-bg-dark);
 }
 
+/* ===== Base Styles ===== */
 html {
   scroll-behavior: smooth;
 }
@@ -30,7 +95,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.625;
   letter-spacing: normal;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -52,7 +117,7 @@ main {
 
 /* Adjust the first section to accommodate the fixed header */
 #about.section-wrapper {
-  @apply pt-28 md:pt-32; /* More padding at the top for the header */
+  @apply pt-28 md:pt-32;
 }
 
 /* ===== Typography ===== */
@@ -101,11 +166,13 @@ li {
 }
 
 nav a {
-  @apply no-underline text-gray-700 hover:text-black;
+  @apply no-underline;
+  color: var(--nav-text);
+  transition: color 0.2s ease;
 }
 
-.dark nav a {
-  @apply text-gray-200 hover:text-white;
+nav a:hover {
+  color: var(--nav-text-hover);
 }
 
 /* Header styles for overlay */
@@ -113,53 +180,44 @@ header {
   transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
 }
 
-/* Header menu text in dark mode */
-.dark header nav a {
-  color: #e5e7eb; /* Light gray */
+/* Header navigation specific styles */
+header nav {
+  color: var(--nav-text);
 }
 
-.dark header nav a:hover {
-  color: #ffffff; /* White on hover */
+/* Mobile menu specific styles */
+.mobile-nav {
+  background-color: var(--card-bg);
+  border-color: var(--border);
 }
 
-/* Ensure header text is visible */
-header nav a {
-  text-shadow: none;
+/* Skills visualization */
+.skill-name {
+  color: var(--foreground);
 }
 
-.dark header h1 {
-  color: #f3f4f6; /* Very light gray */
+.skill-percentage {
+  color: var(--muted);
 }
 
-/* Mobile menu in dark mode */
-.dark .mobile-nav {
-  background-color: #1e293b; /* Dark blue/gray */
-  border-color: #374151; /* Darker border */
+.skill-bar-bg {
+  background-color: color-mix(in oklch, var(--muted) 20%, transparent);
 }
 
-/* Skills visualization in dark mode */
-.dark .skill-name {
-  color: #e5e7eb; /* Light gray */
-}
-
-.dark .skill-percentage {
-  color: #d1d5db; /* Slightly darker gray */
-}
-
-.dark .skill-bar-bg {
-  background-color: #374151; /* Dark gray for the background */
-}
-
-.dark .skill-bar-fill {
-  /* Keep the gradient but with slightly adjusted colors for better visibility */
-  background: linear-gradient(90deg, #3b82f6 0%, #38bdf8 100%);
+.skill-bar-fill {
+  /* Updated to use bg-linear-* gradient syntax */
+  background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
 }
 
 /* ===== Project Cards ===== */
 .project-card {
-  @apply flex flex-col justify-between w-full h-full border rounded-2xl shadow-sm p-6 transition hover:shadow-md;
+  @apply flex flex-col justify-between w-full h-full border rounded-2xl shadow-sm p-6 transition hover:shadow-md cursor-pointer;
   border-color: var(--border);
   background-color: var(--card-bg);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
 }
 
 .project-image {
@@ -183,7 +241,7 @@ header nav a {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.5s ease-in-out;
+  animation: var(--animate-fade-in);
 }
 
 /* Header fade in animation for better UX */
@@ -207,21 +265,6 @@ header nav a {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
-}
-
-/* ===== Project Cards ===== */
-.project-card {
-  @apply flex flex-col justify-between w-full h-full border rounded-2xl shadow-sm p-6 transition hover:shadow-md cursor-pointer;
-  border-color: var(--border);
-  background-color: var(--card-bg);
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-}
-
-.project-image {
-  @apply rounded-xl mb-4;
 }
 
 /* For modal scrollbar styling */
@@ -283,15 +326,19 @@ a:focus-visible {
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   :root {
-    --primary: #0066cc;
-    --secondary: #0088cc;
-    --border: #000000;
+    --primary: oklch(0.40 0.20 255);
+    --secondary: oklch(0.50 0.15 200);
+    --border: oklch(0 0 0);
+    --nav-text: oklch(0 0 0);
+    --nav-active: oklch(0.40 0.20 255);
   }
   
   .dark {
-    --primary: #66b3ff;
-    --secondary: #88ccff;
-    --border: #ffffff;
+    --primary: oklch(0.70 0.15 255);
+    --secondary: oklch(0.75 0.12 200);
+    --border: oklch(1 0 0);
+    --nav-text: oklch(1 0 0);
+    --nav-active: oklch(0.70 0.15 255);
   }
 }
 

@@ -8,7 +8,7 @@ import { NAV_ITEMS, SCROLL_OFFSET, SCROLL_DURATION } from "@/lib/constants/navig
 import { MobileNavProps } from "./Header.types";
 import { cn } from "@/lib/utils/cn";
 
-export default function MobileNav({ isOpen, onClose, activeSection, isDarkMode }: MobileNavProps) {
+export default function MobileNav({ isOpen, onClose, activeSection }: MobileNavProps) {
   const [showProjectsSubmenu, setShowProjectsSubmenu] = useState(false);
 
   return (
@@ -19,12 +19,7 @@ export default function MobileNav({ isOpen, onClose, activeSection, isDarkMode }
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3 }}
-          className={cn(
-            "mobile-nav border-t overflow-hidden md:hidden",
-            isDarkMode 
-              ? 'bg-black border-gray-700' 
-              : 'bg-white border-gray-200'
-          )}
+          className="mobile-nav border-t overflow-hidden md:hidden bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-700"
           id="mobile-navigation"
           role="navigation"
           aria-label="Mobile navigation"
@@ -36,12 +31,7 @@ export default function MobileNav({ isOpen, onClose, activeSection, isDarkMode }
                   <div className="px-4">
                     <button
                       onClick={() => setShowProjectsSubmenu(!showProjectsSubmenu)}
-                      className={cn(
-                        "w-full text-left py-2 flex justify-between items-center",
-                        isDarkMode 
-                          ? 'text-gray-300 hover:text-white' 
-                          : 'text-gray-700 hover:text-black'
-                      )}
+                      className="w-full text-left py-2 flex justify-between items-center transition-colors text-gray-700 dark:text-slate-200 hover:text-gray-900 dark:hover:text-white"
                       aria-expanded={showProjectsSubmenu}
                     >
                       {item.label}
@@ -72,12 +62,7 @@ export default function MobileNav({ isOpen, onClose, activeSection, isDarkMode }
                               setShowProjectsSubmenu(false);
                               onClose();
                             }}
-                            className={cn(
-                              "block py-1 text-sm cursor-pointer",
-                              isDarkMode 
-                                ? 'text-gray-400 hover:text-white' 
-                                : 'text-gray-600 hover:text-black'
-                            )}
+                            className="block py-1 text-sm cursor-pointer transition-colors text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white"
                           >
                             All Projects
                           </ScrollLink>
@@ -93,12 +78,7 @@ export default function MobileNav({ isOpen, onClose, activeSection, isDarkMode }
                                 setShowProjectsSubmenu(false);
                                 onClose();
                               }}
-                              className={cn(
-                                "block py-1 text-sm cursor-pointer",
-                                isDarkMode 
-                                  ? 'text-gray-400 hover:text-white' 
-                                  : 'text-gray-600 hover:text-black'
-                              )}
+                              className="block py-1 text-sm cursor-pointer transition-colors text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white"
                             >
                               {subItem.label}
                             </ScrollLink>
@@ -115,14 +95,10 @@ export default function MobileNav({ isOpen, onClose, activeSection, isDarkMode }
                     offset={SCROLL_OFFSET}
                     onClick={onClose}
                     className={cn(
-                      "block text-center py-2 w-full cursor-pointer",
+                      "block text-center py-2 w-full cursor-pointer transition-colors rounded-md mx-4",
                       activeSection === item.id 
-                        ? isDarkMode 
-                          ? 'text-blue-400 bg-blue-900/20' 
-                          : 'text-blue-600 bg-blue-50'
-                        : isDarkMode 
-                          ? 'text-gray-300 hover:text-white' 
-                          : 'text-gray-700 hover:text-black'
+                        ? "text-blue-600 dark:text-blue-400 bg-blue-600/10 dark:bg-blue-400/20"
+                        : "text-gray-700 dark:text-slate-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800"
                     )}
                   >
                     {item.label}

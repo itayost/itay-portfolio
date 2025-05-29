@@ -9,7 +9,6 @@ import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
 import { useScrolled } from "@/hooks/useScrolled";
 import { useActiveSection } from "@/hooks/useActiveSection";
-import { useTheme } from "@/hooks/useTheme";
 import { useKeyboard } from "@/hooks/useKeyboard";
 import { useIsMobile } from "@/hooks/useMediaQuery";
 import { SCROLL_OFFSET, SCROLL_DURATION } from "@/lib/constants/navigation";
@@ -23,9 +22,7 @@ export default function Header({ className }: HeaderProps) {
   // Use custom hooks
   const scrolled = useScrolled(50);
   const activeSection = useActiveSection();
-  const { theme } = useTheme();
   const isMobile = useIsMobile();
-  const isDarkMode = theme === 'dark';
   
   // Keyboard shortcuts
   useKeyboard('Escape', () => {
@@ -39,9 +36,17 @@ export default function Header({ className }: HeaderProps) {
       role="navigation"
       aria-label="Main navigation" 
       className={cn(
-        "w-full backdrop-blur-md fixed top-0 z-50 transition-all duration-300 header-fade-in",
-        isDarkMode ? 'bg-black/95' : 'bg-white/70',
-        scrolled ? "shadow-md py-2 scrolled" : "py-4",
+        "w-full fixed top-0 z-50 transition-all duration-300 header-fade-in",
+        // Background with dark mode support
+        "bg-white/90 dark:bg-red-500",
+        // Different styles when scrolled
+        scrolled && [
+          "bg-white dark:bg-red-500",
+          "shadow-md dark:shadow-lg",
+          "border-b border-gray-200 dark:border-slate-700"
+        ],
+        // Padding
+        scrolled ? "py-2" : "py-4",
         className
       )}
     >
@@ -64,9 +69,7 @@ export default function Header({ className }: HeaderProps) {
             <h1 className={cn(
               "font-bold text-lg md:text-xl transition-all duration-300",
               scrolled ? 'scale-90' : 'scale-100',
-              isDarkMode 
-                ? scrolled ? 'text-gray-100' : 'text-white' 
-                : scrolled ? 'text-gray-900' : 'text-gray-900',
+              "text-gray-900 dark:text-slate-100",
               "hover:text-blue-600 dark:hover:text-blue-400"
             )}>
               {siteConfig.name}
@@ -83,8 +86,6 @@ export default function Header({ className }: HeaderProps) {
                 "hover:bg-blue-100 dark:hover:bg-blue-900/30",
                 "hover:text-blue-700 dark:hover:text-blue-400"
               )}
-              isDarkMode={isDarkMode}
-              scrolled={scrolled}
             />
             <SocialLink
               href={siteConfig.links.github}
@@ -93,10 +94,8 @@ export default function Header({ className }: HeaderProps) {
               label="GitHub Profile"
               className={cn(
                 "hover:bg-gray-100 dark:hover:bg-gray-800",
-                "hover:text-black dark:hover:text-white"
+                "hover:text-gray-900 dark:hover:text-white"
               )}
-              isDarkMode={isDarkMode}
-              scrolled={scrolled}
             />
           </div>
         </motion.div>
@@ -105,7 +104,6 @@ export default function Header({ className }: HeaderProps) {
         <div className="flex items-center gap-3">
           <DesktopNav 
             activeSection={activeSection} 
-            isDarkMode={isDarkMode} 
             scrolled={scrolled} 
           />
           
@@ -118,9 +116,8 @@ export default function Header({ className }: HeaderProps) {
               whileTap={{ scale: 0.9 }}
               className={cn(
                 "text-2xl focus:outline-none transition rounded-md p-1",
-                isDarkMode 
-                  ? scrolled ? 'text-gray-300' : 'text-white' 
-                  : scrolled ? 'text-gray-700' : 'text-gray-800',
+                "text-gray-700 dark:text-slate-200",
+                "hover:text-gray-900 dark:hover:text-white",
                 "hover:bg-gray-100 dark:hover:bg-gray-800"
               )}
               onClick={() => setIsOpen(!isOpen)}
@@ -140,13 +137,12 @@ export default function Header({ className }: HeaderProps) {
           isOpen={isOpen} 
           onClose={() => setIsOpen(false)} 
           activeSection={activeSection} 
-          isDarkMode={isDarkMode} 
         />
       )}
       
       {/* Progress indicator */}
       <motion.div 
-        className="h-0.5 bg-blue-600 dark:bg-blue-400 origin-left"
+        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 origin-left"
         style={{ 
           scaleX: scrollProgress,
           opacity: scrolled ? 1 : 0
@@ -163,11 +159,9 @@ interface SocialLinkProps {
   title: string;
   label: string;
   className?: string;
-  isDarkMode: boolean;
-  scrolled: boolean;
 }
 
-function SocialLink({ href, icon, title, label, className, isDarkMode, scrolled }: SocialLinkProps) {
+function SocialLink({ href, icon, title, label, className }: SocialLinkProps) {
   return (
     <motion.a
       whileHover={{ scale: 1.1 }}
@@ -177,9 +171,8 @@ function SocialLink({ href, icon, title, label, className, isDarkMode, scrolled 
       rel="noopener noreferrer"
       className={cn(
         "text-xl transition rounded-full p-2",
-        isDarkMode 
-          ? scrolled ? 'text-gray-300' : 'text-white' 
-          : scrolled ? 'text-gray-700' : 'text-gray-800',
+        "text-gray-600 dark:text-slate-300",
+        "hover:text-gray-900 dark:hover:text-white",
         className
       )}
       title={title}
