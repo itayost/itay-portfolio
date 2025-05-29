@@ -87,22 +87,35 @@ function ContactInfoItem({ item }: { item: ContactInfoItem }) {
       className="flex items-center gap-4"
       whileHover={{ x: 5 }}
     >
-      <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-colors bg-blue-100 dark:bg-blue-900/30">
+      <div 
+        className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200"
+        style={{
+          backgroundColor: 'color-mix(in oklch, var(--primary) 15%, transparent)',
+          color: 'var(--primary)'
+        }}
+      >
         <Icon size={20} />
       </div>
       <div>
-        <p className="text-sm mb-1 text-gray-500 dark:text-gray-400">{item.label}</p>
+        <p className="text-sm mb-1" style={{ color: 'var(--muted)' }}>
+          {item.label}
+        </p>
         {item.link ? (
           <a 
             href={item.link} 
             target={item.link.startsWith('mailto') ? '_self' : '_blank'}
             rel="noopener noreferrer"
-            className="text-lg font-medium transition-colors no-underline hover:underline text-blue-600 dark:text-blue-400"
+            className="text-lg font-medium transition-colors no-underline hover:underline"
+            style={{ color: 'var(--primary)' }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--primary)'}
           >
             {item.value}
           </a>
         ) : (
-          <p className="text-lg font-medium">{item.value}</p>
+          <p className="text-lg font-medium" style={{ color: 'var(--foreground)' }}>
+            {item.value}
+          </p>
         )}
       </div>
     </motion.li>
@@ -117,7 +130,7 @@ function SocialMediaSection() {
       className="mt-10 pt-6 border-t"
       style={{ borderColor: 'var(--border)' }}
     >
-      <p className="text-gray-600 dark:text-gray-400 mb-4">
+      <p style={{ color: 'var(--muted)' }} className="mb-4">
         Connect with me on social media
       </p>
       <div className="flex space-x-4">

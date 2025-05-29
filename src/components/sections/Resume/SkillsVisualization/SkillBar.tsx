@@ -16,19 +16,19 @@ export default function SkillBar({ skill, index }: SkillBarProps) {
       className="mb-4"
     >
       <div className="flex justify-between items-center mb-1">
-        <span className="skill-name text-gray-800 dark:text-gray-200 font-medium">
+        <span className="skill-name font-medium">
           {skill.name}
         </span>
-        <span className="skill-percentage text-gray-600 dark:text-gray-400 text-sm">
+        <span className="skill-percentage text-sm">
           {skill.level}%
         </span>
       </div>
-      <div className="skill-bar-bg h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+      <div className="skill-bar-bg h-3 rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: `${skill.level}%` }}
           transition={{ duration: 1, ease: "easeOut", delay: index * 0.1 }}
-          className="skill-bar-fill h-full bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full"
+          className="skill-bar-fill h-full rounded-full"
         />
       </div>
     </motion.div>

@@ -19,7 +19,11 @@ export default function MobileNav({ isOpen, onClose, activeSection }: MobileNavP
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.3 }}
-          className="mobile-nav border-t overflow-hidden md:hidden bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-700"
+          className="mobile-nav overflow-hidden md:hidden"
+          style={{
+            backgroundColor: 'var(--card-bg)',
+            borderTop: '1px solid var(--border)'
+          }}
           id="mobile-navigation"
           role="navigation"
           aria-label="Mobile navigation"
@@ -31,7 +35,10 @@ export default function MobileNav({ isOpen, onClose, activeSection }: MobileNavP
                   <div className="px-4">
                     <button
                       onClick={() => setShowProjectsSubmenu(!showProjectsSubmenu)}
-                      className="w-full text-left py-2 flex justify-between items-center transition-colors text-gray-700 dark:text-slate-200 hover:text-gray-900 dark:hover:text-white"
+                      className="w-full text-left py-2 flex justify-between items-center transition-all"
+                      style={{ color: 'var(--nav-text)' }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = 'var(--nav-text-hover)'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = 'var(--nav-text)'}
                       aria-expanded={showProjectsSubmenu}
                     >
                       {item.label}
@@ -62,7 +69,10 @@ export default function MobileNav({ isOpen, onClose, activeSection }: MobileNavP
                               setShowProjectsSubmenu(false);
                               onClose();
                             }}
-                            className="block py-1 text-sm cursor-pointer transition-colors text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white"
+                            className="block py-1 text-sm cursor-pointer transition-all"
+                            style={{ color: 'var(--muted)' }}
+                            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--nav-text-hover)'}
+                            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--muted)'}
                           >
                             All Projects
                           </ScrollLink>
@@ -78,7 +88,10 @@ export default function MobileNav({ isOpen, onClose, activeSection }: MobileNavP
                                 setShowProjectsSubmenu(false);
                                 onClose();
                               }}
-                              className="block py-1 text-sm cursor-pointer transition-colors text-gray-600 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white"
+                              className="block py-1 text-sm cursor-pointer transition-all"
+                              style={{ color: 'var(--muted)' }}
+                              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--nav-text-hover)'}
+                              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--muted)'}
                             >
                               {subItem.label}
                             </ScrollLink>
@@ -95,11 +108,25 @@ export default function MobileNav({ isOpen, onClose, activeSection }: MobileNavP
                     offset={SCROLL_OFFSET}
                     onClick={onClose}
                     className={cn(
-                      "block text-center py-2 w-full cursor-pointer transition-colors rounded-md mx-4",
-                      activeSection === item.id 
-                        ? "text-blue-600 dark:text-blue-400 bg-blue-600/10 dark:bg-blue-400/20"
-                        : "text-gray-700 dark:text-slate-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-slate-800"
+                      "block text-center py-2 w-full cursor-pointer transition-all rounded-md mx-4",
+                      activeSection === item.id && "font-medium shadow-sm"
                     )}
+                    style={{
+                      color: activeSection === item.id ? 'var(--nav-active)' : 'var(--nav-text)',
+                      backgroundColor: activeSection === item.id ? 'var(--nav-active-bg)' : 'transparent'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (activeSection !== item.id) {
+                        e.currentTarget.style.color = 'var(--nav-text-hover)';
+                        e.currentTarget.style.backgroundColor = 'var(--muted)/10';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeSection !== item.id) {
+                        e.currentTarget.style.color = 'var(--nav-text)';
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
                   >
                     {item.label}
                   </ScrollLink>

@@ -57,12 +57,12 @@ function ConnectHeader() {
 function ConnectDescription() {
   return (
     <>
-      <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
+      <p className="text-lg mb-6" style={{ color: 'var(--muted)' }}>
         Whether you&apos;re looking for a software engineer for a project or just want to discuss technology, 
         I&apos;m always open to new connections and opportunities.
       </p>
       
-      <p className="text-lg text-gray-700 dark:text-gray-300">
+      <p className="text-lg" style={{ color: 'var(--muted)' }}>
         I&apos;m currently focused on expanding my skills in:
       </p>
     </>
@@ -97,7 +97,9 @@ function SkillsFocus({ skills }: { skills: string[] }) {
             className="h-2 w-2 rounded-full" 
             style={{ backgroundColor: 'var(--primary)' }}
           />
-          <span className="font-medium">{skill}</span>
+          <span className="font-medium" style={{ color: 'var(--foreground)' }}>
+            {skill}
+          </span>
         </motion.div>
       ))}
     </motion.div>
@@ -108,10 +110,11 @@ function SkillsFocus({ skills }: { skills: string[] }) {
 function InspirationQuote() {
   return (
     <blockquote
-      className="italic pl-4 py-2 my-6 text-gray-700 dark:text-gray-300"
+      className="italic pl-4 py-2 my-6"
       style={{ 
         borderLeftWidth: '4px',
-        borderLeftColor: 'var(--primary)'
+        borderLeftColor: 'var(--primary)',
+        color: 'var(--muted)'
       }}
     >
       &quot;The best way to predict the future is to create it.&quot;

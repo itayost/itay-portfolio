@@ -37,13 +37,15 @@ export default function Header({ className }: HeaderProps) {
       aria-label="Main navigation" 
       className={cn(
         "w-full fixed top-0 z-50 transition-all duration-300 header-fade-in",
-        // Background with dark mode support
-        "bg-white/90 dark:bg-red-500",
+        // Background with backdrop blur
+        "backdrop-blur-md",
         // Different styles when scrolled
-        scrolled && [
-          "bg-white dark:bg-red-500",
-          "shadow-md dark:shadow-lg",
-          "border-b border-gray-200 dark:border-slate-700"
+        scrolled ? [
+          "bg-[var(--nav-bg-solid)]",
+          "shadow-md",
+          "border-b border-[var(--border)]"
+        ] : [
+          "bg-[var(--nav-bg)]"
         ],
         // Padding
         scrolled ? "py-2" : "py-4",
@@ -69,9 +71,10 @@ export default function Header({ className }: HeaderProps) {
             <h1 className={cn(
               "font-bold text-lg md:text-xl transition-all duration-300",
               scrolled ? 'scale-90' : 'scale-100',
-              "text-gray-900 dark:text-slate-100",
-              "hover:text-blue-600 dark:hover:text-blue-400"
-            )}>
+              "hover:text-[var(--primary)]"
+            )}
+            style={{ color: 'var(--foreground)' }}
+            >
               {siteConfig.name}
             </h1>
           </ScrollLink>
@@ -83,8 +86,8 @@ export default function Header({ className }: HeaderProps) {
               title="View LinkedIn"
               label="LinkedIn Profile"
               className={cn(
-                "hover:bg-blue-100 dark:hover:bg-blue-900/30",
-                "hover:text-blue-700 dark:hover:text-blue-400"
+                "hover:bg-[var(--primary)]/10",
+                "hover:text-[var(--primary)]"
               )}
             />
             <SocialLink
@@ -93,8 +96,8 @@ export default function Header({ className }: HeaderProps) {
               title="View GitHub"
               label="GitHub Profile"
               className={cn(
-                "hover:bg-gray-100 dark:hover:bg-gray-800",
-                "hover:text-gray-900 dark:hover:text-white"
+                "hover:bg-[var(--muted)]/10",
+                "hover:text-[var(--foreground)]"
               )}
             />
           </div>
@@ -115,11 +118,20 @@ export default function Header({ className }: HeaderProps) {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               className={cn(
-                "text-2xl focus:outline-none transition rounded-md p-1",
-                "text-gray-700 dark:text-slate-200",
-                "hover:text-gray-900 dark:hover:text-white",
-                "hover:bg-gray-100 dark:hover:bg-gray-800"
+                "text-2xl focus:outline-none transition-all rounded-md p-1"
               )}
+              style={{
+                color: 'var(--nav-text)',
+                backgroundColor: isOpen ? 'var(--muted)/10' : 'transparent'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--nav-text-hover)';
+                e.currentTarget.style.backgroundColor = 'var(--muted)/10';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--nav-text)';
+                e.currentTarget.style.backgroundColor = isOpen ? 'var(--muted)/10' : 'transparent';
+              }}
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={isOpen}
@@ -142,8 +154,9 @@ export default function Header({ className }: HeaderProps) {
       
       {/* Progress indicator */}
       <motion.div 
-        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 origin-left"
+        className="absolute bottom-0 left-0 right-0 h-0.5 origin-left"
         style={{ 
+          backgroundColor: 'var(--primary)',
           scaleX: scrollProgress,
           opacity: scrolled ? 1 : 0
         }}
@@ -170,11 +183,23 @@ function SocialLink({ href, icon, title, label, className }: SocialLinkProps) {
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "text-xl transition rounded-full p-2",
-        "text-gray-600 dark:text-slate-300",
-        "hover:text-gray-900 dark:hover:text-white",
+        "text-xl transition-all rounded-full p-2",
         className
       )}
+      style={{ 
+        color: 'var(--muted)'
+      }}
+      onMouseEnter={(e) => {
+        const target = e.currentTarget;
+        if (className?.includes('hover:text-[var(--primary)]')) {
+          target.style.color = 'var(--primary)';
+        } else {
+          target.style.color = 'var(--foreground)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.color = 'var(--muted)';
+      }}
       title={title}
       aria-label={label}
     >

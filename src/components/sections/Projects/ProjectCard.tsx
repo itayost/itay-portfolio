@@ -52,7 +52,7 @@ function ProjectContent({ project, onViewDetails }: ProjectCardProps) {
   return (
     <div className="p-6">
       <h2 className="text-lg font-semibold mb-2">{project.title}</h2>
-      <p className="text-gray-700 dark:text-gray-300 mb-4">
+      <p className="mb-4" style={{ color: 'var(--muted)' }}>
         {project.shortDescription}
       </p>
       
@@ -73,13 +73,25 @@ function TechnologyTags({ technologies }: { technologies: string[] }) {
       {displayTechs.map((tech) => (
         <span 
           key={tech} 
-          className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-xs"
+          className="px-3 py-1 rounded-full text-xs"
+          style={{
+            backgroundColor: 'color-mix(in oklch, var(--muted) 20%, transparent)',
+            color: 'var(--foreground)',
+            border: '1px solid var(--border)'
+          }}
         >
           {tech}
         </span>
       ))}
       {remainingCount > 0 && (
-        <span className="px-3 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full text-xs">
+        <span 
+          className="px-3 py-1 rounded-full text-xs"
+          style={{
+            backgroundColor: 'color-mix(in oklch, var(--muted) 20%, transparent)',
+            color: 'var(--foreground)',
+            border: '1px solid var(--border)'
+          }}
+        >
           +{remainingCount} more
         </span>
       )}

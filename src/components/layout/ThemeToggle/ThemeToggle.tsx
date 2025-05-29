@@ -18,11 +18,23 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
       onClick={toggleTheme}
       className={cn(
         "w-10 h-10 rounded-full flex items-center justify-center",
-        "text-gray-700 dark:text-gray-300",
-        "hover:bg-gray-200 dark:hover:bg-gray-700",
-        "transition-colors",
+        "transition-all duration-200",
         className
       )}
+      style={{
+        backgroundColor: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
+        color: 'var(--foreground)'
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = theme === 'dark' 
+          ? 'rgba(255, 255, 255, 0.2)' 
+          : 'rgba(0, 0, 0, 0.1)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = theme === 'dark' 
+          ? 'rgba(255, 255, 255, 0.1)' 
+          : 'rgba(0, 0, 0, 0.05)';
+      }}
       aria-label={theme === 'dark' ? "Switch to light mode" : "Switch to dark mode"}
     >
       <motion.div
@@ -31,9 +43,15 @@ export default function ThemeToggle({ className }: ThemeToggleProps) {
         transition={{ duration: 0.3 }}
       >
         {theme === 'dark' ? (
-          <FaSun className="text-yellow-400" />
+          <FaSun 
+            className="text-xl"
+            style={{ color: 'var(--accent)' }}
+          />
         ) : (
-          <FaMoon className="text-blue-700" />
+          <FaMoon 
+            className="text-xl"
+            style={{ color: 'var(--primary)' }}
+          />
         )}
       </motion.div>
     </motion.button>

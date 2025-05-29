@@ -75,7 +75,13 @@ function Name() {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.5, duration: 0.5 }}
-      className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-teal-400 text-transparent bg-clip-text"
+      className="text-5xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text"
+      style={{
+        backgroundImage: 'linear-gradient(to right, var(--primary), var(--secondary))',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
+      }}
     >
       {siteConfig.name}
     </motion.h1>
@@ -145,8 +151,15 @@ function CTAButtons() {
         <MotionButton
           variant="outline"
           size="lg"
-          className="cursor-pointer text-white border-white hover:bg-white/10"
-          whileHover={{ scale: 1.05 }}
+          className="cursor-pointer text-white border-white"
+          style={{
+            borderColor: 'rgba(255, 255, 255, 0.8)',
+            color: 'white'
+          }}
+          whileHover={{ 
+            scale: 1.05,
+            backgroundColor: 'rgba(255, 255, 255, 0.1)'
+          }}
           whileTap={{ scale: 0.95 }}
         >
           Contact Me
