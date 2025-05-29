@@ -1,3 +1,5 @@
+// src/components/layout/Footer/SocialLinks.tsx
+
 "use client";
 
 import { motion } from "framer-motion";

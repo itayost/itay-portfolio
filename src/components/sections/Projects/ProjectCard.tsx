@@ -1,3 +1,5 @@
+// src/components/sections/Projects/ProjectCard.tsx - Updated with container queries
+
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -16,7 +18,7 @@ export default function ProjectCard({ project, onViewDetails }: ProjectCardProps
     <MotionCard
       variant="interactive"
       padding="none"
-      className="group"
+      className="group @container"
       onClick={() => onViewDetails(project)}
       whileHover={{ y: -5 }}
       whileTap={{ scale: 0.98 }}
@@ -27,10 +29,10 @@ export default function ProjectCard({ project, onViewDetails }: ProjectCardProps
   );
 }
 
-// Project Image Component
+// Project Image Component - Updated with container query responsive behavior
 function ProjectImage({ project }: { project: Project }) {
   return (
-    <div className="relative w-full h-[200px] overflow-hidden rounded-t-xl">
+    <div className="relative w-full h-[200px] @md:h-[220px] @lg:h-[240px] overflow-hidden rounded-t-xl">
       <Image
         src={project.imageUrl}
         alt={project.title}
@@ -40,19 +42,19 @@ function ProjectImage({ project }: { project: Project }) {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
         <div className="p-4 text-white">
-          <p className="font-medium">View Details</p>
+          <p className="font-medium @sm:text-lg">View Details</p>
         </div>
       </div>
     </div>
   );
 }
 
-// Project Content Component
+// Project Content Component - Updated with container query responsive behavior
 function ProjectContent({ project, onViewDetails }: ProjectCardProps) {
   return (
-    <div className="p-6">
-      <h2 className="text-lg font-semibold mb-2">{project.title}</h2>
-      <p className="mb-4" style={{ color: 'var(--muted)' }}>
+    <div className="p-4 @sm:p-5 @md:p-6">
+      <h2 className="text-base @sm:text-lg @md:text-xl font-semibold mb-2">{project.title}</h2>
+      <p className="text-sm @sm:text-base mb-4 line-clamp-2 @md:line-clamp-3" style={{ color: 'var(--muted)' }}>
         {project.shortDescription}
       </p>
       
@@ -63,17 +65,17 @@ function ProjectContent({ project, onViewDetails }: ProjectCardProps) {
   );
 }
 
-// Technology Tags Component
+// Technology Tags Component - Updated with container queries
 function TechnologyTags({ technologies }: { technologies: string[] }) {
   const displayTechs = technologies.slice(0, 3);
   const remainingCount = technologies.length - 3;
   
   return (
-    <div className="mt-4 flex flex-wrap gap-2">
+    <div className="mt-4 flex flex-wrap gap-1.5 @sm:gap-2">
       {displayTechs.map((tech) => (
         <span 
           key={tech} 
-          className="px-3 py-1 rounded-full text-xs"
+          className="px-2 @sm:px-3 py-0.5 @sm:py-1 rounded-full text-[10px] @sm:text-xs"
           style={{
             backgroundColor: 'color-mix(in oklch, var(--muted) 20%, transparent)',
             color: 'var(--foreground)',
@@ -85,7 +87,7 @@ function TechnologyTags({ technologies }: { technologies: string[] }) {
       ))}
       {remainingCount > 0 && (
         <span 
-          className="px-3 py-1 rounded-full text-xs"
+          className="px-2 @sm:px-3 py-0.5 @sm:py-1 rounded-full text-[10px] @sm:text-xs"
           style={{
             backgroundColor: 'color-mix(in oklch, var(--muted) 20%, transparent)',
             color: 'var(--foreground)',
@@ -110,7 +112,7 @@ function ProjectActions({ project, onViewDetails }: ProjectCardProps) {
           e.stopPropagation();
           onViewDetails(project);
         }}
-        className="text-sm"
+        className="text-xs @sm:text-sm"
       >
         <span className="font-medium">View Details</span>
         <span className="transform group-hover:translate-x-0.5 transition-transform duration-300">→</span>
@@ -121,7 +123,7 @@ function ProjectActions({ project, onViewDetails }: ProjectCardProps) {
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
-        className="w-9 h-9 rounded-full flex items-center justify-center border transition-all"
+        className="w-8 h-8 @sm:w-9 @sm:h-9 rounded-full flex items-center justify-center border transition-all"
         style={{ 
           borderColor: 'var(--border)',
           color: 'var(--foreground)',
@@ -135,7 +137,7 @@ function ProjectActions({ project, onViewDetails }: ProjectCardProps) {
         whileTap={{ scale: 0.95 }}
         aria-label={`GitHub repository for ${project.title}`}
       >
-        <FaGithub size={16} />
+        <FaGithub className="text-sm @sm:text-base" />
       </motion.a>
     </div>
   );
