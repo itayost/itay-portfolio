@@ -1,3 +1,5 @@
+// src/components/common/Button/styles.ts - Fixed for Tailwind CSS v4
+
 import { cn } from "@/lib/utils/cn";
 
 export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success';
@@ -16,13 +18,11 @@ interface ButtonStylesProps {
 const baseStyles = cn(
   // Core styles
   "font-medium rounded-full inline-flex items-center justify-center gap-2",
-  // Transition with v4 optimizations
+  // Transition
   "transition-all duration-200",
   // v4: Starting styles for enter animations
   "starting:scale-95 starting:opacity-0",
-  // v4: Native color scheme support
-  "color-scheme-light dark:color-scheme-dark",
-  // Focus styles with v4 improvements
+  // Focus styles
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
   // Disabled state
   "disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none",
@@ -37,59 +37,56 @@ const variants = {
     "bg-[var(--primary)] text-white",
     "hover:bg-[var(--accent)] hover:scale-105",
     "active:scale-95",
-    // v4: Enhanced shadows with layering
+    // Enhanced shadows
     "shadow-md hover:shadow-lg",
-    "inset-shadow-sm", // Subtle inset shadow for depth
-    // v4: Focus with theme colors
+    "shadow-[color-mix(in_oklch,var(--primary)_25%,transparent)]",
+    // Focus with theme colors
     "focus-visible:outline-[var(--primary)]"
   ),
   
   secondary: cn(
-    "bg-gray-200 dark:bg-gray-700",
-    "text-gray-900 dark:text-gray-100",
-    "hover:bg-gray-300 dark:hover:bg-gray-600",
-    "hover:scale-102", // Subtle scale
-    "active:scale-98",
+    "bg-[color-mix(in_oklch,var(--muted)_20%,transparent)]",
+    "text-[var(--foreground)]",
+    "hover:bg-[color-mix(in_oklch,var(--muted)_30%,transparent)]",
+    "hover:scale-[1.02]", // Subtle scale
+    "active:scale-[0.98]",
     "shadow-sm hover:shadow-md",
-    "focus-visible:outline-gray-500"
+    "focus-visible:outline-[var(--muted)]"
   ),
   
   outline: cn(
-    "border-2 border-current",
-    "bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800",
-    "hover:scale-102",
-    "active:scale-98",
-    // v4: Dynamic border color based on text color
-    "hover:border-[var(--primary)]",
-    "focus-visible:outline-current"
+    "border-2 border-[var(--primary)]",
+    "bg-transparent text-[var(--primary)]",
+    "hover:bg-[color-mix(in_oklch,var(--primary)_10%,transparent)]",
+    "hover:scale-[1.02]",
+    "active:scale-[0.98]",
+    "focus-visible:outline-[var(--primary)]"
   ),
   
   ghost: cn(
-    "bg-transparent",
-    "hover:bg-gray-100 dark:hover:bg-gray-800",
-    "hover:scale-102",
-    "active:scale-98",
-    "focus-visible:outline-gray-400"
+    "bg-transparent text-[var(--foreground)]",
+    "hover:bg-[color-mix(in_oklch,var(--muted)_10%,transparent)]",
+    "hover:scale-[1.02]",
+    "active:scale-[0.98]",
+    "focus-visible:outline-[var(--muted)]"
   ),
   
   danger: cn(
-    // v4: Using OKLCH for vibrant reds
-    "bg-red-600 text-white",
-    "hover:bg-red-700 hover:scale-105",
+    // Using OKLCH for vibrant reds
+    "bg-[oklch(0.55_0.22_25)] text-white",
+    "hover:bg-[oklch(0.50_0.24_25)] hover:scale-105",
     "active:scale-95",
     "shadow-md hover:shadow-lg",
-    "inset-shadow-sm",
-    "focus-visible:outline-red-600"
+    "focus-visible:outline-[oklch(0.55_0.22_25)]"
   ),
   
   success: cn(
-    // v4: Using OKLCH for vibrant greens
-    "bg-green-600 text-white",
-    "hover:bg-green-700 hover:scale-105",
+    // Using OKLCH for vibrant greens
+    "bg-[oklch(0.55_0.20_145)] text-white",
+    "hover:bg-[oklch(0.50_0.22_145)] hover:scale-105",
     "active:scale-95",
     "shadow-md hover:shadow-lg",
-    "inset-shadow-sm",
-    "focus-visible:outline-green-600"
+    "focus-visible:outline-[oklch(0.55_0.20_145)]"
   )
 };
 
@@ -124,7 +121,7 @@ const loadingStyles = cn(
   "pointer-events-none",
   // Loading spinner styles
   "after:absolute after:inset-0",
-  "after:m-auto after:size-4",
+  "after:m-auto after:h-4 after:w-4",
   "after:rounded-full",
   "after:border-2 after:border-current",
   "after:border-t-transparent",
@@ -153,18 +150,23 @@ export function getButtonStyles({
 
 // Additional v4-specific enhancements that can be mixed in
 export const buttonEnhancements = {
-  // 3D transforms for special buttons
-  "3d": "transform-3d perspective-1000 hover:rotate-x-6 hover:rotate-y-6",
+  // Gradient backgrounds using CSS variables
+  "gradient": cn(
+    "bg-[image:linear-gradient(135deg,var(--primary),var(--secondary))]",
+    "hover:bg-[image:linear-gradient(135deg,var(--secondary),var(--accent))]",
+    "transition-[background-image] duration-300"
+  ),
   
-  // Gradient backgrounds using v4's improved gradient API
-  "gradient": "bg-linear-to-r from-[var(--primary)] to-[var(--accent)]",
-  "gradient-radial": "bg-radial from-[var(--primary)] to-[var(--accent)]",
+  "gradient-radial": cn(
+    "bg-[image:radial-gradient(circle_at_center,var(--primary),var(--secondary))]",
+    "hover:bg-[image:radial-gradient(circle_at_center,var(--secondary),var(--accent))]"
+  ),
   
   // Glassmorphism effect
   "glass": cn(
     "backdrop-blur-md",
-    "bg-white/10 dark:bg-black/10",
-    "border border-white/20 dark:border-white/10",
+    "bg-[color-mix(in_oklch,var(--card-bg)_30%,transparent)]",
+    "border border-[color-mix(in_oklch,var(--border)_50%,transparent)]",
     "shadow-xl"
   ),
   
@@ -172,7 +174,7 @@ export const buttonEnhancements = {
   "neon": cn(
     "shadow-[0_0_20px_var(--primary)]",
     "hover:shadow-[0_0_30px_var(--primary)]",
-    "inset-shadow-sm"
+    "transition-shadow duration-300"
   ),
   
   // Pulse animation for CTAs
@@ -180,6 +182,13 @@ export const buttonEnhancements = {
   
   // Magnetic hover effect
   "magnetic": "hover:translate-y-[-2px] hover:shadow-xl active:translate-y-0",
+  
+  // 3D transforms
+  "3d": cn(
+    "[transform-style:preserve-3d]",
+    "hover:[transform:perspective(1000px)_rotateX(-10deg)]",
+    "transition-transform duration-300"
+  ),
   
   // Split color effect
   "split": cn(
