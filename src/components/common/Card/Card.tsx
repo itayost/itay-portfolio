@@ -1,13 +1,14 @@
 "use client";
 
 import { forwardRef, HTMLAttributes } from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion, MotionProps } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'hover' | 'interactive';
   padding?: 'none' | 'sm' | 'md' | 'lg';
-  motionProps?: HTMLMotionProps<"div">;
+  asMotion?: boolean;
+  motionProps?: MotionProps;
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
@@ -16,6 +17,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
     variant = 'default', 
     padding = 'md',
     children,
+    asMotion = false,
     motionProps,
     ...props 
   }, ref) => {
@@ -34,24 +36,35 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       lg: "p-8"
     };
     
-    const Component = motionProps ? motion.div : 'div';
-    const componentProps = motionProps ? { ...props, ...motionProps } : props;
+    const cardClassName = cn(
+      baseStyles,
+      "border-[var(--border)]",
+      "bg-[var(--card-bg)]",
+      variants[variant],
+      paddings[padding],
+      className
+    );
+    
+    if (asMotion && motionProps) {
+      return (
+        <motion.div
+          ref={ref}
+          className={cardClassName}
+          {...motionProps}
+        >
+          {children}
+        </motion.div>
+      );
+    }
     
     return (
-      <Component
+      <div
         ref={ref}
-        className={cn(
-          baseStyles,
-          "border-[var(--border)]",
-          "bg-[var(--card-bg)]",
-          variants[variant],
-          paddings[padding],
-          className
-        )}
-        {...componentProps}
+        className={cardClassName}
+        {...props}
       >
         {children}
-      </Component>
+      </div>
     );
   }
 );
