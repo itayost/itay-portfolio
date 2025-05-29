@@ -11,7 +11,7 @@ import { NAV_ITEMS, SCROLL_OFFSET, SCROLL_DURATION } from "@/lib/constants/navig
 import { DesktopNavProps } from "./Header.types";
 import { cn } from "@/lib/utils/cn";
 
-export default function DesktopNav({ activeSection, scrolled }: DesktopNavProps) {
+export default function DesktopNav({ activeSection }: DesktopNavProps) {
   const [showProjectsSubmenu, setShowProjectsSubmenu] = useState(false);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const navRef = useRef<HTMLDivElement>(null);
