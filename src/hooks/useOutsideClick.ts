@@ -18,7 +18,7 @@ export function useOutsideClick<T extends HTMLElement = HTMLElement>(
     if (!enabled) return;
 
     const listener = (event: MouseEvent | TouchEvent) => {
-      const el = ref?.current;
+      const el = ref.current;
       
       // Do nothing if clicking ref's element or descendent elements
       if (!el || el.contains(event.target as Node)) {
@@ -37,5 +37,5 @@ export function useOutsideClick<T extends HTMLElement = HTMLElement>(
     };
   }, [handler, enabled]);
 
-  return ref;
+  return ref as RefObject<T>;
 }
