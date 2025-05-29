@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, HTMLAttributes, ReactNode } from "react";
-import { motion, MotionProps } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils/cn";
 
 export type CardVariant = 'default' | 'hover' | 'interactive' | 'elevated' | 'outlined' | 'glass' | 'gradient';

@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaLinkedin, FaGithub, FaMapMarkerAlt } from "react-icons/fa";
-import Card from "@/components/common/Card";
+import { MotionCard } from "@/components/common/Card";
 import SocialLinks from "@/components/layout/Footer/SocialLinks";
 import { siteConfig } from "@/lib/config/site";
 import { staggerContainer, staggerItem } from "@/lib/utils/animations";
@@ -48,15 +48,13 @@ export default function ContactInfoCard({ className = "" }: ContactInfoCardProps
   ];
 
   return (
-    <Card
+    <MotionCard
       variant="hover"
       className={className}
-      motionProps={{
-        variants: staggerContainer,
-        initial: "hidden",
-        whileInView: "visible",
-        viewport: { once: true }
-      }}
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
     >
       <motion.h3 
         variants={staggerItem}
@@ -75,7 +73,7 @@ export default function ContactInfoCard({ className = "" }: ContactInfoCardProps
       </motion.ul>
       
       <SocialMediaSection />
-    </Card>
+    </MotionCard>
   );
 }
 

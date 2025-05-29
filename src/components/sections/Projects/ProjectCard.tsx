@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
-import Card from "@/components/common/Card";
+import { MotionCard } from "@/components/common/Card";
 import Button from "@/components/common/Button";
 import { Project } from "@/types/project";
 
@@ -13,19 +13,17 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, onViewDetails }: ProjectCardProps) {
   return (
-    <Card
+    <MotionCard
       variant="interactive"
       padding="none"
       className="group"
       onClick={() => onViewDetails(project)}
-      motionProps={{
-        whileHover: { y: -5 },
-        whileTap: { scale: 0.98 }
-      }}
+      whileHover={{ y: -5 }}
+      whileTap={{ scale: 0.98 }}
     >
       <ProjectImage project={project} />
       <ProjectContent project={project} onViewDetails={onViewDetails} />
-    </Card>
+    </MotionCard>
   );
 }
 

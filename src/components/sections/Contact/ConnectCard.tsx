@@ -2,7 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaEnvelope } from "react-icons/fa";
-import Card from "@/components/common/Card";
+import { MotionCard } from "@/components/common/Card";
 import Button from "@/components/common/Button";
 
 interface ConnectCardProps {
@@ -20,15 +20,13 @@ const SKILLS_FOCUS = [
 
 export default function ConnectCard({ className = "" }: ConnectCardProps) {
   return (
-    <Card
+    <MotionCard
       variant="hover"
       className={className}
-      motionProps={{
-        initial: { opacity: 0, y: 20 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true },
-        transition: { duration: 0.5, delay: 0.3 }
-      }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.3 }}
     >
       <div className="flex flex-col h-full justify-between">
         <div>
@@ -42,7 +40,7 @@ export default function ConnectCard({ className = "" }: ConnectCardProps) {
           <EmailButton />
         </div>
       </div>
-    </Card>
+    </MotionCard>
   );
 }
 
