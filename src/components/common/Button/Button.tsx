@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, ButtonHTMLAttributes, ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion, MotionProps } from "framer-motion";
 import { 
   getButtonStyles, 
   getEnhancedButtonStyles, 
@@ -19,7 +19,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   rightIcon?: ReactNode;
   enhancements?: (keyof typeof buttonEnhancements)[];
   asMotion?: boolean;
-  motionProps?: any;
+  motionProps?: Omit<MotionProps, 'children'>;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
