@@ -7,7 +7,7 @@ import { FaChevronUp, FaMapMarkerAlt, FaEnvelope, FaCode, FaHeart } from "react-
 import { Link as ScrollLink } from "react-scroll";
 import SocialLinks from "./SocialLinks";
 import { GlassCard } from "@/components/common/Card";
-import Button from "@/components/common/Button";
+import MotionButton from "@/components/common/MotionButton";
 import AnimatedCircles from "@/components/ui/AnimatedCircles";
 import { useScrolled } from "@/hooks/useScrolled";
 import { siteConfig } from "@/lib/config/site";
@@ -371,34 +371,33 @@ function ScrollToTop() {
         duration={800}
         className="cursor-pointer"
       >
-        <motion.div
-          whileHover={{ scale: 1.1 }}
+        <MotionButton
+          variant="ghost"
+          size="sm"
+          className="rounded-full backdrop-blur-md group"
+          style={{
+            background: 'color-mix(in oklch, var(--primary) 10%, transparent)',
+            border: '1px solid var(--border)',
+          }}
+          whileHover={{ 
+            scale: 1.1,
+          }}
           whileTap={{ scale: 0.95 }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'color-mix(in oklch, var(--primary) 20%, transparent)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'color-mix(in oklch, var(--primary) 10%, transparent)';
+          }}
         >
-          <Button
-            variant="ghost"
-            size="sm"
-            className="rounded-full backdrop-blur-md group"
-            style={{
-              background: 'color-mix(in oklch, var(--primary) 10%, transparent)',
-              border: '1px solid var(--border)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'color-mix(in oklch, var(--primary) 20%, transparent)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'color-mix(in oklch, var(--primary) 10%, transparent)';
-            }}
+          <span className="mr-2 text-xs">Back to top</span>
+          <motion.div
+            animate={{ y: [-2, 0, -2] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
           >
-            <span className="mr-2 text-xs">Back to top</span>
-            <motion.div
-              animate={{ y: [-2, 0, -2] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              <FaChevronUp size={14} />
-            </motion.div>
-          </Button>
-        </motion.div>
+            <FaChevronUp size={14} />
+          </motion.div>
+        </MotionButton>
       </ScrollLink>
     </motion.div>
   );
