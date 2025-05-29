@@ -4,7 +4,7 @@ import { FaDownload } from "react-icons/fa";
 import SkillsVisualization from "./SkillsVisualization";
 import EducationCard from "./EducationCard";
 import LanguagesCard from "./LanguagesCard";
-import Button from "@/components/common/Button";
+import MotionButton from "@/components/common/MotionButton";
 import { RESUME_DATA } from "@/lib/constants/skills";
 import { fadeInUp } from "@/lib/utils/animations";
 
@@ -32,16 +32,14 @@ function ResumeHeader() {
     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
       <h1 className="text-4xl font-bold">Resume</h1>
       <a href={RESUME_DATA.resumePdfPath} download>
-        <Button
+        <MotionButton
           variant="secondary"
           size="md"
-          motionProps={{
-            whileHover: { scale: 1.05 },
-            whileTap: { scale: 0.95 }
-          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           <FaDownload /> Download PDF
-        </Button>
+        </MotionButton>
       </a>
     </div>
   );

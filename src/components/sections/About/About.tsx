@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { FaChevronDown } from "react-icons/fa";
 import { Link as ScrollLink } from "react-scroll";
 import RoleText from "./RoleText";
-import Button from "@/components/common/Button";
+import MotionButton from "@/components/common/MotionButton";
 import { siteConfig } from "@/lib/config/site";
 import { SCROLL_DURATION, SCROLL_OFFSET } from "@/lib/constants/navigation";
 
@@ -125,17 +125,15 @@ function CTAButtons() {
         duration={SCROLL_DURATION}
         offset={SCROLL_OFFSET}
       >
-        <Button
+        <MotionButton
           variant="primary"
           size="lg"
           className="cursor-pointer"
-          motionProps={{
-            whileHover: { scale: 1.05 },
-            whileTap: { scale: 0.95 }
-          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           View My Work
-        </Button>
+        </MotionButton>
       </ScrollLink>
       
       <ScrollLink
@@ -144,17 +142,15 @@ function CTAButtons() {
         duration={SCROLL_DURATION}
         offset={SCROLL_OFFSET}
       >
-        <Button
+        <MotionButton
           variant="outline"
           size="lg"
           className="cursor-pointer text-white border-white hover:bg-white/10"
-          motionProps={{
-            whileHover: { scale: 1.05 },
-            whileTap: { scale: 0.95 }
-          }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           Contact Me
-        </Button>
+        </MotionButton>
       </ScrollLink>
     </motion.div>
   );
