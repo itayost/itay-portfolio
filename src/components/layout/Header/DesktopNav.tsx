@@ -11,7 +11,7 @@ import { NAV_ITEMS, SCROLL_OFFSET, SCROLL_DURATION } from "@/lib/constants/navig
 import { DesktopNavProps } from "./Header.types";
 import { cn } from "@/lib/utils/cn";
 
-export default function DesktopNav({ activeSection }: DesktopNavProps) {
+export default function DesktopNav({ activeSection, scrolled }: DesktopNavProps) {
   const [showProjectsSubmenu, setShowProjectsSubmenu] = useState(false);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const navRef = useRef<HTMLDivElement>(null);
@@ -75,7 +75,9 @@ export default function DesktopNav({ activeSection }: DesktopNavProps) {
         {NAV_ITEMS.map((item, index) => (
           <div 
             key={item.id} 
-            ref={(el) => itemRefs.current[index] = el}
+            ref={(el) => {
+              itemRefs.current[index] = el;
+            }}
             className="relative"
           >
             {item.subItems ? (
