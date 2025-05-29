@@ -90,7 +90,7 @@ function ContactInfoItem({ item }: { item: ContactInfoItem }) {
       whileHover={{ x: 5 }}
     >
       <div className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-colors bg-blue-100 dark:bg-blue-900/30">
-        <Icon size={20} className="text-blue-600 dark:text-blue-400" />
+        <Icon size={20} />
       </div>
       <div>
         <p className="text-sm mb-1 text-gray-500 dark:text-gray-400">{item.label}</p>
