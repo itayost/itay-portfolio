@@ -1,4 +1,4 @@
-// src/components/sections/About/About.tsx - Mobile-optimized version
+// src/components/sections/About/About.tsx - Mobile-optimized version with dynamic padding
 
 "use client";
 import { useState, useEffect } from "react";
@@ -11,6 +11,8 @@ import AnimatedCircles from "@/components/ui/AnimatedCircles";
 import { siteConfig } from "@/lib/config/site";
 import { SCROLL_DURATION, SCROLL_OFFSET } from "@/lib/constants/navigation";
 import { useIsMobile } from "@/hooks/useMediaQuery";
+import { useScrolled } from "@/hooks/useScrolled";
+import { cn } from "@/lib/utils/cn";
 
 const ROLES = ["Software Engineer", "Game Developer", "Mobile App Developer"];
 const ROLE_ICONS = [FaCode, FaGamepad, FaMobile];
@@ -18,29 +20,30 @@ const ROLE_ICONS = [FaCode, FaGamepad, FaMobile];
 export default function AboutSection() {
   const [loaded, setLoaded] = useState(false);
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
-  
+
   // Detect mobile and reduced motion preferences
   const isMobile = useIsMobile();
   const shouldReduceMotion = useReducedMotion();
-  
+  const scrolled = useScrolled(50);
+
   // Parallax scroll effect - disabled on mobile for performance
   const { scrollY } = useScroll();
   const backgroundY = useTransform(
-    scrollY, 
-    [0, 500], 
+    scrollY,
+    [0, 500],
     isMobile || shouldReduceMotion ? [0, 0] : [0, 150]
   );
   const contentY = useTransform(
-    scrollY, 
-    [0, 300], 
+    scrollY,
+    [0, 300],
     isMobile || shouldReduceMotion ? [0, 0] : [0, -50]
   );
-  
+
   // Handle loading state
   useEffect(() => {
     setLoaded(true);
   }, []);
-  
+
   // Rotate through roles - slower on mobile
   useEffect(() => {
     const interval = setInterval(() => {
@@ -48,26 +51,30 @@ export default function AboutSection() {
     }, isMobile ? 4000 : 3000);
     return () => clearInterval(interval);
   }, [isMobile]);
-  
+
   const CurrentIcon = ROLE_ICONS[currentRoleIndex];
-  
+
   return (
     <section
       id="about"
-      className="relative min-h-[100dvh] w-full flex items-center overflow-hidden pt-20 md:pt-24"
+      className={cn(
+        "relative min-h-[100dvh] w-full flex items-center overflow-hidden transition-all duration-300",
+        // Dynamic padding based on scroll state
+        scrolled ? "pt-24 md:pt-28" : "pt-32 md:pt-40"
+      )}
       aria-label={`About ${siteConfig.name}`}
       role="region"
     >
       {/* Simplified gradient background for mobile */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 z-0"
         style={{ y: backgroundY }}
       >
         {isMobile ? <SimplifiedBackground /> : <AnimatedBackground />}
       </motion.div>
-      
+
       {/* Content */}
-      <motion.div 
+      <motion.div
         className="container mx-auto px-4 relative z-10 pb-20"
         style={{ y: contentY }}
       >
@@ -84,18 +91,18 @@ export default function AboutSection() {
             transition={{ delay: 0.2, duration: isMobile ? 0.3 : 0.5 }}
             className="mb-6 inline-block"
           >
-            <GlassCard 
-              padding="none" 
+            <GlassCard
+              padding="none"
               className="!rounded-full px-5 py-2.5"
               noBorder={false}
             >
               <div className="flex items-center gap-2">
                 <motion.div
                   animate={{ rotate: [0, 360] }}
-                  transition={{ 
-                    duration: isMobile ? 30 : 20, 
-                    repeat: Infinity, 
-                    ease: "linear" 
+                  transition={{
+                    duration: isMobile ? 30 : 20,
+                    repeat: Infinity,
+                    ease: "linear"
                   }}
                   className="inline-flex"
                 >
@@ -107,15 +114,15 @@ export default function AboutSection() {
               </div>
             </GlassCard>
           </motion.div>
-          
+
           {/* Name with gradient - simplified animation on mobile */}
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: isMobile ? 0.3 : 0.5 }}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
           >
-            <span 
+            <span
               className="bg-clip-text text-transparent inline-block"
               style={{
                 backgroundImage: 'linear-gradient(135deg, var(--primary), var(--secondary), var(--accent))',
@@ -126,23 +133,23 @@ export default function AboutSection() {
               {siteConfig.name}
             </span>
           </motion.h1>
-          
+
           {/* Animated role text - simplified on mobile */}
-          <RoleDisplay 
-            roles={ROLES} 
-            currentIndex={currentRoleIndex} 
+          <RoleDisplay
+            roles={ROLES}
+            currentIndex={currentRoleIndex}
             isMobile={isMobile}
           />
-          
+
           {/* Description using GlassCard */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: isMobile ? 0.3 : 0.5 }}
             className="mb-10 max-w-2xl mx-auto"
           >
             <GlassCard padding={isMobile ? "md" : "lg"}>
-              <p 
+              <p
                 className="text-base sm:text-lg md:text-xl leading-relaxed"
                 style={{ color: 'var(--foreground)' }}
               >
@@ -150,9 +157,9 @@ export default function AboutSection() {
               </p>
             </GlassCard>
           </motion.div>
-          
+
           {/* CTA Buttons using our Button component */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: isMobile ? 0.3 : 0.5 }}
@@ -173,7 +180,7 @@ export default function AboutSection() {
                 View My Work
               </Button>
             </ScrollLink>
-            
+
             <ScrollLink
               to="contact"
               smooth={true}
@@ -192,7 +199,7 @@ export default function AboutSection() {
               </Button>
             </ScrollLink>
           </motion.div>
-          
+
           {/* Decorative elements - hidden on mobile */}
           {!isMobile && (
             <>
@@ -206,10 +213,10 @@ export default function AboutSection() {
           )}
         </motion.div>
       </motion.div>
-      
+
       {/* Scroll Indicator */}
       <ScrollIndicator isMobile={isMobile} />
-      
+
       {/* CSS for gradient animation - only on desktop */}
       {!isMobile && (
         <style jsx>{`
@@ -228,7 +235,7 @@ export default function AboutSection() {
 function SimplifiedBackground() {
   return (
     <>
-      <div 
+      <div
         className="absolute inset-0"
         style={{
           background: `linear-gradient(135deg, 
@@ -237,9 +244,9 @@ function SimplifiedBackground() {
           )`,
         }}
       />
-      
+
       {/* Noise texture overlay - optimized for mobile */}
-      <div 
+      <div
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
@@ -255,7 +262,7 @@ function AnimatedBackground() {
   return (
     <>
       {/* Primary gradient */}
-      <div 
+      <div
         className="absolute inset-0"
         style={{
           background: `linear-gradient(135deg, 
@@ -265,7 +272,7 @@ function AnimatedBackground() {
           )`,
         }}
       />
-      
+
       {/* Animated orbs */}
       <motion.div
         className="absolute top-1/4 -left-20 w-96 h-96 rounded-full"
@@ -284,7 +291,7 @@ function AnimatedBackground() {
           opacity: 0.3,
         }}
       />
-      
+
       <motion.div
         className="absolute bottom-1/4 -right-20 w-96 h-96 rounded-full"
         animate={{
@@ -302,9 +309,9 @@ function AnimatedBackground() {
           opacity: 0.3,
         }}
       />
-      
+
       {/* Grid pattern overlay */}
-      <div 
+      <div
         className="absolute inset-0 opacity-10"
         style={{
           backgroundImage: `linear-gradient(var(--border) 1px, transparent 1px),
@@ -312,9 +319,9 @@ function AnimatedBackground() {
           backgroundSize: '50px 50px',
         }}
       />
-      
+
       {/* Noise texture overlay */}
-      <div 
+      <div
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
@@ -326,10 +333,10 @@ function AnimatedBackground() {
 }
 
 // Optimized role display
-function RoleDisplay({ roles, currentIndex, isMobile }: { 
-  roles: string[], 
+function RoleDisplay({ roles, currentIndex, isMobile }: {
+  roles: string[],
   currentIndex: number,
-  isMobile: boolean 
+  isMobile: boolean
 }) {
   return (
     <motion.div
@@ -344,7 +351,7 @@ function RoleDisplay({ roles, currentIndex, isMobile }: {
           key={role}
           className="absolute inset-0 flex items-center justify-center"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ 
+          animate={{
             opacity: index === currentIndex ? 1 : 0,
             y: index === currentIndex ? 0 : 20
           }}
@@ -360,7 +367,7 @@ function RoleDisplay({ roles, currentIndex, isMobile }: {
 // Optimized scroll indicator
 function ScrollIndicator({ isMobile }: { isMobile: boolean }) {
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: isMobile ? 1.5 : 2, duration: 0.5 }}
@@ -375,7 +382,7 @@ function ScrollIndicator({ isMobile }: { isMobile: boolean }) {
       >
         <motion.div
           animate={isMobile ? {} : { y: [0, 8, 0] }}
-          transition={{ 
+          transition={{
             y: { repeat: Infinity, duration: 1.5, ease: "easeInOut" }
           }}
         >
