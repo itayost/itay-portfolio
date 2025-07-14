@@ -1,0 +1,5 @@
+// public/.well-known/security.txt
+Contact: mailto:itayost1@gmail.com
+Expires: 2025-12-31T23:59:59.000Z
+Preferred-Languages: en, he
+Canonical: https://www.itayost.com/.well-known/security.txt

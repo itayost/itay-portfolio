@@ -1,0 +1,19 @@
+// public/humans.txt
+/* TEAM */
+Developer: Itay Ostraich
+Contact: itayost1@gmail.com
+Location: Ramat Gan, Israel
+LinkedIn: https://www.linkedin.com/in/itayost
+GitHub: https://github.com/itayost
+
+/* THANKS */
+Framework: Next.js
+Icons: React Icons
+Animation: Framer Motion
+Styling: Tailwind CSS
+
+/* SITE */
+Last update: 2025/01/01
+Language: English
+Doctype: HTML5
+IDE: Visual Studio Code
